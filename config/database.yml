@@ -1,0 +1,20 @@
+# PostgreSQL. Versions 9.1 and up are supported.
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: file-share_development
+
+test:
+  <<: *default
+  database: file-share_test
+
+production:
+  <<: *default
+  database: file-share_production
+  username: file-share
+  password: <%= ENV['FILE-SHARE_DATABASE_PASSWORD'] %>
