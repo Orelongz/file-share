@@ -14,7 +14,4 @@ test:
   database: file-share_test
 
 production:
-  <<: *default
-  database: file-share_production
-  username: file-share
-  password: <%= ENV['FILE-SHARE_DATABASE_PASSWORD'] %>
+  url: <%= ENV["DATABASE_URL"] %>
