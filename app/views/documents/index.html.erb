@@ -1,0 +1,36 @@
+<%= link_to 'Upload A New File', new_document_path, class: 'btn' %>
+
+<h1 class="text-center mt-5">All Uploaded Files</h1>
+
+<% if @documents.length == 0 %>
+  <h1 class='text-center'>
+    <%= link_to 'No uploads presently. Upload a file', new_document_path %>
+  </h1>
+<% else %>
+  <table>
+    <tr class="bg-secondary">
+      <th>Document</th>
+      <th>Description</th>
+      <th colspan="2">Actions</th>
+    </tr>
+    
+      <% @documents.each do |document| %>
+        <% document.files.each do |file| %>
+          <tr>
+            <td>
+              <%= link_to file.filename, url_for(file), target: '_blank' %>
+            </td>
+            <td>
+              <%= document.description %>
+            </td>
+            <td>
+              <%= link_to 'download', rails_blob_url(file, disposition: "attachment") %>
+            </td>
+            <td>
+              <%= link_to 'delete', document_path(document, file_id: file.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+  </table>
+<% end %>

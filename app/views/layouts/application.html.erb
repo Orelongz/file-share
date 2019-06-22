@@ -10,6 +10,12 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class='container mt-2 mb-5'>
+      <% flash.each do |key, value| %>
+        <div class="text-center alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+
+      <%= yield %>
+    <div>
   </body>
 </html>
